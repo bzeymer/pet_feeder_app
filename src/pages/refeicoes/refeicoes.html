@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Refeições</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="proxima-refeicao">
+    <div class="title">Próxima refeição:</div>
+    
+    <div class="refeicao">
+      {{proximaRefeicao}}
+    </div>
+    
+    <div class="hora" [ngClass]="{atraso: atrasado}">
+      {{horaProximaRefeicao.calendar()}}
+    </div>
+    
+    <div class="atraso alerta" *ngIf="atrasado">
+      Os animais estão {{horaProximaRefeicao.fromNow()}} com fome!
+    </div>
+
+    <div class="atraso alerta" *ngIf="atrasado">
+      Quem tem fome tem pressa!
+    </div>  
+  </div>
+  
+  <ion-item-divider></ion-item-divider>
+
+  <div class="refeicoes">
+    <div class="title">Refeições anteriores:</div>
+    <ion-list>
+      <ion-item *ngFor="let refeicao of refeicoes">
+        <h2>{{refeicao.type}}</h2>
+        <h3>{{refeicao.time.calendar()}}</h3>
+        <p>Aimentado por: {{refeicao.user}}</p>
+        <ion-avatar item-end *ngFor="let animal of refeicao.animals">
+          <img src="../../assets/imgs/{{animal}}.png">
+        </ion-avatar>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+  

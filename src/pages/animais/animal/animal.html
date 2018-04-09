@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-title>{{animal.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-slides pager="true">
+      <ion-slide *ngFor="let image of animal.images">
+        <img [src]="image"/>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-fab top right>
+      <button ion-fab mini><ion-icon name="create"></ion-icon></button>
+    </ion-fab>  
+    
+  </div>
+  
+  <ion-segment [(ngModel)]="currentTab">
+    <ion-segment-button value="description">
+      Descrição
+    </ion-segment-button>
+    <ion-segment-button value="info">
+      Informações
+    </ion-segment-button>
+    <ion-segment-button value="history">
+      Histórico
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="currentTab">
+    <ion-list *ngSwitchCase="'description'">
+      <ion-item text-wrap>
+        {{animal.description}}
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'info'" no-lines>
+      <ion-item>
+        Raça: {{animal.info.race}}
+      </ion-item> 
+        
+      <ion-item>
+        Peso: {{animal.info.weight}} kg
+      </ion-item> 
+
+      <ion-item>
+        Cor: {{animal.info.color}}
+      </ion-item> 
+
+      <ion-item>
+        Data de Nascimento: {{animal.info.birth.format('L')}}
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'history'">
+      <ion-item *ngFor="let item of animal.history">
+        <ion-icon [name]="item.icon" item-start></ion-icon>
+        <h2>{{item.name}}</h2>
+        <h3>{{item.date.format("LLLL")}}</h3>
+        <p>{{item.description}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

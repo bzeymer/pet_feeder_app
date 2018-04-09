@@ -1,0 +1,19 @@
+[col-6] {
+    padding: 0;
+}
+
+.card-md {
+    margin: 5px;
+    margin-right: 0;
+    width: calc(100% - 10px);
+}
+
+ion-card-content p {
+    display: block;
+    display: -webkit-box;
+    height: 60px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
